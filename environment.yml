@@ -1,0 +1,6 @@
+name: bgpt
+dependencies:
+  - python=3.11
+  - pandas
+  - matplotlib
+  - ipython
