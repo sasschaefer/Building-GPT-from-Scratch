@@ -72,16 +72,12 @@ pip install -r requirements.txt
 3. Execute the following command to create the environment:
 
 ```bash 
-conda create -m venv -f environment.yml
+conda create -f environment.yml
 ```
 - Activate the virtual environment:
 --> On Windows, Unix and MacOS:
 ```bash
-conda activate venv
-```
-- Install required packages
-```bash
-pip install -r requirements.txt
+conda activate bgpt
 ```
 
 ## Structure of this Repository
