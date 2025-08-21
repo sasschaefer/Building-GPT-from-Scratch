@@ -6,6 +6,7 @@ This repository contains a project for the seminar 'Building GPT from Scratch' b
 - [Overview](#overview)
 - [QuickStart](#quickstart)
 - [Structure of this Repository](#structure-of-this-repository)
+- [Content of this Repository] (#content-of-this-repository)
 ---
 ## Overview
 
@@ -99,3 +100,48 @@ conda activate bgpt
 
 - **src/**  
   Contains core source code files for agents, environment, training, and utilities.
+
+
+## Content of this Repository
+
+The project was split into four tasks. In this document, we will go through each task separetly and explain our procedure. However, for more detailed implementation information, please have a look at the specified notebook and python files. 
+
+### Task 1
+
+#### Words and Corpora: Preprocessing the training data
+
+Before we can actually work with large amounts of texts and training our model, we need to preprocess our text inputs.
+
+And as discussed in class, we started off with replicating the NLTK approach as shown in class.
+In this approach, we counted the frequency of the words in a specified portion of shakespeare.txt and sorted them in descending order. 
+
+```
+# Complete Linux command for word frequency counting
+!cat shakespeare.txt | tr 'A-Z' 'a-z' | tr -sc 'a-z' '\n' | sort | uniq -c | sort -nr | head -10
+```
+
+**add picture of output**
+
+Afterwards, we did replicate this approach in python using NLTK. 
+
+#### Byte-Pair Encoding 
+
+Our goal was to implement and train a BPE with a varying k.  The general procedure was as follows:
+
+**describe BPE programming**
+
+We did also test the segmenter against an unseen webtext of the same size as the shakespeare one. In the following plots, we evalueted the performance of our BPE.
+
+** add picture of diagram**
+
+As seen in the plots, ....
+Accuracy stuff...
+
+### Task 2
+
+
+
+
+
+
+
