@@ -106,41 +106,67 @@ conda activate bgpt
 
 The project was split into four tasks. In this document, we will go through each task separetly and explain our procedure. However, for more detailed implementation information, please have a look at the specified notebook and python files. 
 
+---
+
 ### Task 1
 
-#### Words and Corpora: Preprocessing the training data
+Before we can work with large amounts of text and train our model, the raw text inputs need to be preprocessed.  
 
-Before we can actually work with large amounts of texts and training our model, we need to preprocess our text inputs.
-
-And as discussed in class, we started off with replicating the NLTK approach as shown in class.
-In this approach, we counted the frequency of the words in a specified portion of shakespeare.txt and sorted them in descending order. 
-
+As discussed in class, we began by replicating a Unix/Linux word frequency command using a portion of `shakespeare.txt`. This allows us to quickly verify the vocabulary and token distributions:
 ```
-# Complete Linux command for word frequency counting
+# Count word frequencies, lowercase, letters-only, sorted descending
 !cat shakespeare.txt | tr 'A-Z' 'a-z' | tr -sc 'a-z' '\n' | sort | uniq -c | sort -nr | head -10
 ```
 
 **add picture of output**
 
-Afterwards, we did replicate this approach in python using NLTK. 
+We then replicated this approach in Python using NLTK to generate letters-only tokens and compute top-word statistics programmatically. 
 
-#### Byte-Pair Encoding 
+#### Byte-Pair Encoding (BPE)
 
-Our goal was to implement and train a BPE with a varying k.  The general procedure was as follows:
+Our main goal was to implement BPE segmentation and train it with varying merge sizes (k). The procedure can be summarized as:
 
-**describe BPE programming**
+1. **Convert words to symbol sequences:**
+    Each word is split into characters with an end-of-word marker </w>.
 
-We did also test the segmenter against an unseen webtext of the same size as the shakespeare one. In the following plots, we evalueted the performance of our BPE.
+2. **Count adjacent symbol pairs:**
+       ```
+        pair_counts = count_adjacent_pairs(word_sequences)
+       ```
+3. **Merge the most frequent pair:**
+       ```
+        new_sequences = merge_pair(sequences, most_common_pair)
+       ```
+4. **Repeat steps 2–3 for k iterations.**
+5. **Save vocab and merges for later tokenization and evaluation.**
 
-** add picture of diagram**
+We also implemented helpers to tokenize new texts using the learned merges and compute metrics such as:
 
-As seen in the plots, ....
-Accuracy stuff...
+- Average tokens per word
+- Word-as-token rate
+- Multi-character token usage
+- Type compression
 
-### Task 2
+#### Evaluation on WebText
 
+To evaluate the generalization of our segmenter, we applied it to an unseen WebText corpus of a similar size. We compared performance on Shakespeare train/test sets and WebText across multiple k values and normalization strategies.
 
+**Add performance plots here**
 
+The plots show expected trends:
+- Increasing k reduces the word-as-token rate, as more words are split into subwords.
+- Merge-use rate rises with k, indicating that frequent subwords are effectively merged.
+- Normalization affects type compression and multi-character token usage slightly, but overall patterns are consistent.
+
+Overall, these results confirm that our BPE segmenter learns meaningful subword units and generalizes reasonably well to unseen data.
+
+#### Summary 
+
+- Preprocessing included letter-only normalization, word frequency checks, and WebText cleaning.
+- BPE was trained for multiple k values and evaluated on multiple datasets.
+- Metrics indicate proper segmentation behavior, with decreasing word-as-token rate and increasing multi-character token usage as k grows.
+
+*Full code and additional visualizations are available in [Task 1 Notebook](task1.ipynb) and related Python files.*
 
 
 
