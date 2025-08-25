@@ -168,6 +168,48 @@ Overall, these results confirm that our BPE segmenter learns meaningful subword 
 
 *Full code and additional visualizations are available in [Task 1 Notebook](task1.ipynb) and related Python files.*
 
+### Task 2
+
+With BPE-preprocessed text available, we moved on to **training classical n-gram language models** and evaluating their performance under different smoothing techniques.
+
+#### N-gram Modeling  
+We implemented models for n = 1…4 with:  
+- Maximum Likelihood (ML) estimates  
+- Laplace smoothing  
+- Linear interpolation (weights tuned on the validation set)  
+- Backoff methods: stupid backoff and a simplified Katz-style backoff  
+
+Perplexity (PPL) was the main evaluation metric. For each `k` (BPE merge size), tokenized train/valid/test sets were used, following the class requirement that **validation is for hyperparameter tuning, not k-selection**.
+
+#### Intrinsic Evaluation  
+- **Grid search over λ** for interpolation ensured probabilities summed to 1.  
+- **Perplexities** were reported across ML, Laplace, interpolation, and backoff.  
+- Note: stupid backoff is not normalized, so its PPL values are *relative*, not absolute.
+
+_Add plot of PPL trends across n and k here_
+
+#### Extrinsic Evaluation (Text Generation)  
+We extended the models to **generate continuations** from prompts:  
+- Decoding via argmax or sampling (temperature scaling).  
+- Outputs were scored with **diversity metrics** (`distinct-1/2`) and simple repetition statistics.  
+- A fast generation suite compared multiple (prompt, mode, n) configurations systematically.
+
+_Add example generations/screenshots here_
+
+#### Results  
+- **Sampling**: very diverse outputs (distinct-1 ≈ 0.9–1.0, distinct-2 ≈ 0.95–1.0).  
+- **Argmax decoding**: collapsed to loops, especially with backoff and Laplace bigrams (d1 ≈ 0.2–0.3). Interpolation with n=3 helped slightly but still repetitive.  
+- **Repetition metrics**: adjacent-repeat detector missed phrase-level loops, so richer metrics are recommended.  
+- **Backoff caveat**: stupid backoff produced usable generations but should not be compared by PPL to normalized models.
+
+#### Summary  
+- Implemented n-gram models with multiple smoothing strategies.  
+- Perplexity used for intrinsic evaluation; sampling experiments for extrinsic evaluation.  
+- Sampling yielded high diversity, while argmax decoding collapsed.  
+- Results highlight the trade-offs between smoothing methods and the limitations of simple backoff.  
+- Full details, metrics, and generation outputs are in the Task 2 notebook.
+
+*Full code and additional visualizations are available in [Task 2 Notebook](task2.ipynb) and related Python files.*
 
 
 
