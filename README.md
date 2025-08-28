@@ -12,7 +12,9 @@ This repository contains a project for the seminar 'Building GPT from Scratch' b
 
 
 ## QuickStart
-To start of quickly and be able to execute the code properly, follow this guide.
+To start of quickly and be able to execute the code properly, follow this guide. Or you can use this shortcut and have a look at the project in this [Google Colab](
+https://colab.research.google.com/drive/1gcrZEx1hgEA_Q6HeN9q6efYLW1Vq-80p?usp=sharing)
+
 
 Fist we need to install [Git](#git) to be able to clone this repository.
 Then decide, whether you want to set up your virtual environment with [venv](#venv) (built into Python) or [Conda](#conda) (a package and environment manager from Anaconda/Miniconda).
