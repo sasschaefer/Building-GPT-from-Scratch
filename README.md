@@ -167,6 +167,7 @@ The plots show expected trends:
 - Normalization affects type compression and multi-character token usage slightly, but overall patterns are consistent.
 
 Overall, these results confirm that our BPE segmenter learns meaningful subword units and generalizes reasonably well to unseen data.
+<img width="605" height="266" alt="Bild1" src="https://github.com/user-attachments/assets/3cd62772-2eaf-4d7c-a321-e6aae7eb70a3" />
 
 
 #### Summary 
@@ -222,6 +223,8 @@ We tracked training using perplexity and applied early stopping with patience to
 The model was able to generate text conditioned on a given context. Loss and validation curves were recorded to visualize training dynamics and assess model performance.
 
 Training and validation losses consistently decreased with the number of epochs, indicating effective learning without overfitting. The model achieved a steady reduction in perplexity on validation data, confirming that the hardcoded neural embedding layer was able to capture sequential patterns in the Shakespeare corpus.
+<img width="1000" height="500" alt="ngram_losses" src="https://github.com/user-attachments/assets/d6c4007b-1523-4968-9440-b36d17da198f" />
+
 
 ### Task 4
 In this task, we extended our previous n-gram models to a small GPT-style transformer for Shakespeare text generation. The focus was on implementing essential components, particularly causal self-attention, manually—without relying on PyTorch’s built-in transformer modules. Full transformer blocks were not reimplemented from scratch, but each block included layer normalization, a manually coded attention mechanism, and an MLP with GELU activation.
@@ -231,6 +234,10 @@ We reused BPE merges from the n-gram step and token conventions (<bos>, <eos>, <
 
 
 Evaluation metrics included validation and test perplexity, computed using teacher forcing. We also performed a small hyperparameter sweep over dropout rates to study its effect on generalization. Dropout was chosen as a key hyperparameter because it prevents overfitting: too low dropout risks memorization of training data, while too high dropout can hinder learning.  Using too much dropout (0.3–0.5) makes the performance worse, because the model cannot learn enough from the data. No dropout (0.0) works okay, but a small dropout improves the generalization slightly. In our case, 0.1 worked best.
+<img width="800" height="500" alt="plot" src="https://github.com/user-attachments/assets/af6ea610-a4e5-4582-9a2d-b60b237063b9" />
+
+
+<img width="800" height="500" alt="history_plot" src="https://github.com/user-attachments/assets/31b890c5-da4b-44ea-a204-2fca82eb83ef" />
 
 
 Sample text generation from trained checkpoints demonstrated that the GPT-style model could generate coherent Shakespearean-like sequences conditioned on a prompt, outperforming the earlier n-gram and neural n-gram baselines in terms of perplexity. 
