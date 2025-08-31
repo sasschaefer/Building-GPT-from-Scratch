@@ -6,7 +6,6 @@ This repository contains a project for the seminar 'Building GPT from Scratch' b
 - [Overview](#overview)
 - [QuickStart](#quickstart)
 - [Structure of this Repository](#structure-of-this-repository)
-- [Content of this Repository] (#content-of-this-repository)
 ---
 ## Overview
 
@@ -91,6 +90,8 @@ conda activate bgpt
 ├── main.ipynb
 ├── README.md
 ├── requirements.txt
+├── Corpus/
+├── Generated Tokens/
 ├── models/
 └── src/
     ├── 
