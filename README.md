@@ -91,7 +91,9 @@ conda activate bgpt
 ├── README.md
 ├── requirements.txt
 ├── Corpus/
-├── Generated Tokens/
+├── Generated_tokens/
+├── artifacts/
+├── runs/
 ├── models/
 └── src/
     ├── 
