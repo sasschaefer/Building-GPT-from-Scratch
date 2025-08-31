@@ -87,7 +87,10 @@ conda activate bgpt
 ```
 .
 ├── .gitignore
-├── main.ipynb
+├── task1.ipynb
+├── task2.ipynb
+├── task3.ipynb
+├── task4.ipynb
 ├── README.md
 ├── requirements.txt
 ├── Corpus/
@@ -211,6 +214,23 @@ We extended the models to **generate continuations** from prompts:
 - Results highlight the trade-offs between smoothing methods and the limitations of simple backoff.  
 - Full details, metrics, and generation outputs are in the Task 2 notebook.
 
+### Task 3
+For this task, we implemented a hardcoded neural embedding layer for conditional text generation using only NumPy. The embeddings and training logic were handled manually, with SGD optimization.
+
+We tracked training using perplexity and applied early stopping with patience to prevent overfitting. The best model checkpoints were saved based on validation performance.
+The model was able to generate text conditioned on a given context. Loss and validation curves were recorded to visualize training dynamics and assess model performance.
+
+### Task 4
+In this task, we extended our previous n-gram models to a small GPT-style transformer for Shakespeare text generation. The focus was on implementing essential components, particularly causal self-attention, manually—without relying on PyTorch’s built-in transformer modules. Full transformer blocks were not reimplemented from scratch, but each block included layer normalization, a manually coded attention mechanism, and an MLP with GELU activation.
+
+
+We reused BPE merges from the n-gram step and token conventions (<bos>, <eos>, </w>). Training was conducted with standard PyTorch initialization and the AdamW optimizer, keeping optimizer hyperparameters fixed. The model’s embedding size, number of heads, number of layers, batch size, and dropout were adjustable. We implemented logging, CSV exports, checkpointing, and sample text generation during training.
+
+
+Evaluation metrics included validation and test perplexity, computed using teacher forcing. We also performed a small hyperparameter sweep over dropout rates to study its effect on generalization. Dropout was chosen as a key hyperparameter because it prevents overfitting: too low dropout risks memorization of training data, while too high dropout can hinder learning.
+
+
+Sample text generation from trained checkpoints demonstrated that the GPT-style model could generate coherent Shakespearean-like sequences conditioned on a prompt, outperforming the earlier n-gram and neural n-gram baselines in terms of perplexity. 
 
 
 
