@@ -168,6 +168,7 @@ The plots show expected trends:
 
 Overall, these results confirm that our BPE segmenter learns meaningful subword units and generalizes reasonably well to unseen data.
 
+
 #### Summary 
 
 - Preprocessing included letter-only normalization, word frequency checks, and WebText cleaning.
@@ -220,6 +221,8 @@ For this task, we implemented a hardcoded neural embedding layer for conditional
 We tracked training using perplexity and applied early stopping with patience to prevent overfitting. The best model checkpoints were saved based on validation performance.
 The model was able to generate text conditioned on a given context. Loss and validation curves were recorded to visualize training dynamics and assess model performance.
 
+Training and validation losses consistently decreased with the number of epochs, indicating effective learning without overfitting. The model achieved a steady reduction in perplexity on validation data, confirming that the hardcoded neural embedding layer was able to capture sequential patterns in the Shakespeare corpus.
+
 ### Task 4
 In this task, we extended our previous n-gram models to a small GPT-style transformer for Shakespeare text generation. The focus was on implementing essential components, particularly causal self-attention, manually—without relying on PyTorch’s built-in transformer modules. Full transformer blocks were not reimplemented from scratch, but each block included layer normalization, a manually coded attention mechanism, and an MLP with GELU activation.
 
@@ -227,7 +230,7 @@ In this task, we extended our previous n-gram models to a small GPT-style transf
 We reused BPE merges from the n-gram step and token conventions (<bos>, <eos>, </w>). Training was conducted with standard PyTorch initialization and the AdamW optimizer, keeping optimizer hyperparameters fixed. The model’s embedding size, number of heads, number of layers, batch size, and dropout were adjustable. We implemented logging, CSV exports, checkpointing, and sample text generation during training.
 
 
-Evaluation metrics included validation and test perplexity, computed using teacher forcing. We also performed a small hyperparameter sweep over dropout rates to study its effect on generalization. Dropout was chosen as a key hyperparameter because it prevents overfitting: too low dropout risks memorization of training data, while too high dropout can hinder learning.
+Evaluation metrics included validation and test perplexity, computed using teacher forcing. We also performed a small hyperparameter sweep over dropout rates to study its effect on generalization. Dropout was chosen as a key hyperparameter because it prevents overfitting: too low dropout risks memorization of training data, while too high dropout can hinder learning.  Using too much dropout (0.3–0.5) makes the performance worse, because the model cannot learn enough from the data. No dropout (0.0) works okay, but a small dropout improves the generalization slightly. In our case, 0.1 worked best.
 
 
 Sample text generation from trained checkpoints demonstrated that the GPT-style model could generate coherent Shakespearean-like sequences conditioned on a prompt, outperforming the earlier n-gram and neural n-gram baselines in terms of perplexity. 
