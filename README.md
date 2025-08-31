@@ -167,6 +167,8 @@ The plots show expected trends:
 - Normalization affects type compression and multi-character token usage slightly, but overall patterns are consistent.
 
 Overall, these results confirm that our BPE segmenter learns meaningful subword units and generalizes reasonably well to unseen data.
+
+
 <img width="605" height="266" alt="Bild1" src="https://github.com/user-attachments/assets/3cd62772-2eaf-4d7c-a321-e6aae7eb70a3" />
 
 
