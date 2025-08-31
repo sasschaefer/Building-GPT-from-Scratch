@@ -107,7 +107,7 @@ conda activate bgpt
   Contains our trained model files
 
 - **src/**  
-  Contains core source code files for agents, environment, training, and utilities.
+  Contains core source code files for bpe, evaluation, neural n-grams, ngrams and utilities.
 
 
 ## Content of this Repository
