@@ -126,8 +126,6 @@ As discussed in class, we began by replicating a Unix/Linux word frequency comma
 !cat shakespeare.txt | tr 'A-Z' 'a-z' | tr -sc 'a-z' '\n' | sort | uniq -c | sort -nr | head -10
 ```
 
-**add picture of output**
-
 We then replicated this approach in Python using NLTK to generate letters-only tokens and compute top-word statistics programmatically. 
 
 #### Byte-Pair Encoding (BPE)
@@ -159,7 +157,6 @@ We also implemented helpers to tokenize new texts using the learned merges and c
 
 To evaluate the generalization of our segmenter, we applied it to an unseen WebText corpus of a similar size. We compared performance on Shakespeare train/test sets and WebText across multiple k values and normalization strategies.
 
-**Add performance plots here**
 
 The plots show expected trends:
 - Increasing k reduces the word-as-token rate, as more words are split into subwords.
@@ -174,7 +171,6 @@ Overall, these results confirm that our BPE segmenter learns meaningful subword 
 - BPE was trained for multiple k values and evaluated on multiple datasets.
 - Metrics indicate proper segmentation behavior, with decreasing word-as-token rate and increasing multi-character token usage as k grows.
 
-*Full code and additional visualizations are available in [Task 1 Notebook](task1.ipynb) and related Python files.*
 
 ### Task 2
 
@@ -194,7 +190,6 @@ Perplexity (PPL) was the main evaluation metric. For each `k` (BPE merge size), 
 - **Perplexities** were reported across ML, Laplace, interpolation, and backoff.  
 - Note: stupid backoff is not normalized, so its PPL values are *relative*, not absolute.
 
-_Add plot of PPL trends across n and k here_
 
 #### Extrinsic Evaluation (Text Generation)  
 We extended the models to **generate continuations** from prompts:  
@@ -202,7 +197,6 @@ We extended the models to **generate continuations** from prompts:
 - Outputs were scored with **diversity metrics** (`distinct-1/2`) and simple repetition statistics.  
 - A fast generation suite compared multiple (prompt, mode, n) configurations systematically.
 
-_Add example generations/screenshots here_
 
 #### Results  
 - **Sampling**: very diverse outputs (distinct-1 ≈ 0.9–1.0, distinct-2 ≈ 0.95–1.0).  
@@ -217,7 +211,6 @@ _Add example generations/screenshots here_
 - Results highlight the trade-offs between smoothing methods and the limitations of simple backoff.  
 - Full details, metrics, and generation outputs are in the Task 2 notebook.
 
-*Full code and additional visualizations are available in [Task 2 Notebook](task2.ipynb) and related Python files.*
 
 
 
