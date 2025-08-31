@@ -38,7 +38,7 @@ git clone https://github.com/sasschaefer/Building-GPT-from-Scratch
 ```
 - Change into the cloned repository:
 ```bash
-cd UDL-Reinforcement-Learning
+cd Building-GPT-from-Scratch
 ```
 
 ### Set Up a Virtual Environment (venv)
